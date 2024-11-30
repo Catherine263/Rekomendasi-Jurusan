@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekomendasi Jurusan</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Link Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <h1>Sistem Pakar: Rekomendasi Jurusan Kuliah
+                <i class="fa-solid fa-gears"></i>
+            </h1>
+            
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <form action="proses.php" method="POST">
+            <div class="input-section">
+                <h2>Masukkan Nilai Anda</h2>
+                <label>Pendidikan Pancasila</label>
+                <input type="number" name="nilai_pp" min="0" max="100" required>
+                
+                <label>Bahasa Indonesia</label>
+                <input type="number" name="nilai_bi" min="0" max="100" required>
+                
+                <label>Matematika</label>
+                <input type="number" name="nilai_mtk" min="0" max="100" required>
+                
+                <label>Bahasa Inggris</label>
+                <input type="number" name="nilai_inggris" min="0" max="100" required>
+                
+                <label>Pendidikan Jasmani</label>
+                <input type="number" name="nilai_penjas" min="0" max="100" required>
+                
+                <label>Sejarah</label>
+                <input type="number" name="nilai_sejarah" min="0" max="100" required>
+                
+                <label>Seni dan Budaya</label>
+                <input type="number" name="nilai_seni" min="0" max="100" required>
+            </div>
+
+            <div class="input-section">
+                <h2>Pilih Jurusan yang Anda Minati</h2>
+                <label for="jurusan">Jurusan:</label>
+                <select name="jurusan" id="jurusan" required>
+                    <option value="Kedokteran dan Ilmu Kesehatan">Kedokteran dan Ilmu Kesehatan</option>
+                    <option value="Teknik">Teknik</option>
+                    <option value="Ekonomi dan Bisnis">Ekonomi dan Bisnis</option>
+                    <option value="Pertanian">Pertanian</option>
+                    <option value="Peternakan">Peternakan</option>
+                    <option value="FPIK">FPIK</option>
+                    <option value="Hukum">Hukum</option>
+                    <option value="FISIP">FISIP</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">Cari Rekomendasi</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 Sistem Pakar. All Rights Reserved.</p>
+            <p>Created by Marvell Yehezkiel Palenewen and Catherine Maria Assa</p>
+        </div>
+    </footer>
+</body>
+</html>
