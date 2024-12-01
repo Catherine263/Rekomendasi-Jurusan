@@ -89,15 +89,132 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "Sejarah" => 0.2,
             "Seni dan Budaya" => 0.1,
         ],
+        "FIB" => [
+            "Pendidikan Pancasila" => 0.1,
+            "Bahasa Indonesia" => 0.3,
+            "Matematika" => 0.1,
+            "Bahasa Inggris" => 0.2,
+            "Pendidikan Jasmani Olahraga dan Kesehatan" => 0.1,
+            "Sejarah" => 0.2,
+            "Seni dan Budaya" => 0.2,
+        ],
+        "FMIPA" => [
+            "Pendidikan Pancasila" => 0.1,
+            "Bahasa Indonesia" => 0.1,
+            "Matematika" => 0.4,
+            "Bahasa Inggris" => 0.2,
+            "Pendidikan Jasmani Olahraga dan Kesehatan" => 0.1,
+            "Sejarah" => 0.0,
+            "Seni dan Budaya" => 0.1,
+        ],
+        "FKM" => [
+            "Pendidikan Pancasila" => 0.1,
+            "Bahasa Indonesia" => 0.1,
+            "Matematika" => 0.2,
+            "Bahasa Inggris" => 0.3,
+            "Pendidikan Jasmani Olahraga dan Kesehatan" => 0.2,
+            "Sejarah" => 0.1,
+            "Seni dan Budaya" => 0.0,
+        ],
+    ];
+
+    $prodi_per_jurusan = [
+        "Kedokteran dan Ilmu Kesehatan" => [
+            "Profesi Dokter",
+            "Profesi Dokter Gigi",
+            "Profesi Ners",
+            "Pendidikan Dokter Gigi",
+            "Ilmu Keperawatan",
+            "Ilmu Penyakit Mata",
+            "Ilmu Kesehatan Anak",
+            "Ilmu Bedah",
+            "Ilmu Penyakit Dalam",
+            "Ilmu Kebidanan Dan Penyakit Kandungan",
+            "Ilmu Penyakit Kulit Dan Kelamin",
+            "Ilmu Kedokteran Fisik Dan Rehabilitasi",
+            "Ilmu Penyakit Jantung Dan Pembuluh Darah",
+            "Neurologi"
+        ],
+        "Teknik" => [
+            "Teknik Sipil",
+            "Arsitektur",
+            "Teknik Elektro",
+            "Teknik Mesin",
+            "Perencanaan Wilayah Dan Kota",
+            "Teknik Informatika",
+            "Teknik Lingkungan"
+        ],
+        "Pertanian" => [
+            "Agronomi",
+            "Ilmu Tanah",
+            "Agribisnis",
+            "Teknologi Pangan",
+            "Teknik Pertanian",
+            "Ilmu Kehutanan",
+            "Agroteknologi",
+            "Proteksi Tanaman"
+        ],
+        "Peternakan" => [
+            "Produksi Ternak",
+            "Nutrisi Dan Makanan Ternak",
+            "Sosial Ekonomi Peternakan",
+            "Peternakan"
+        ],
+        "FPIK" => [
+            "Manajemen Sumberdaya Perairan",
+            "Budidaya Perairan",
+            "Ilmu Kelautan",
+            "Teknologi Hasil Perikanan",
+            "Pemanfaatan Sumberdaya Perikanan",
+            "Agrobisnis Perikanan"
+        ],
+        "Ekonomi dan Bisnis" => [
+            "Profesi Akuntan",
+            "Ekonomi Pembangunan",
+            "Manajemen",
+            "Akuntansi"
+        ],
+        "Hukum" => [
+            "Ilmu Hukum"
+        ],
+        "FISIP" => [
+            "Perpustakaan",
+            "Ilmu Administrasi Negara",
+            "Ilmu Administrasi Bisnis",
+            "Ilmu Pemerintahan",
+            "Ilmu Politik",
+            "Ilmu Komunikasi",
+            "Sosiologi",
+            "Antropologi Sosial",
+            "Ilmu Perpustakaan"
+        ],
+        "FIB" => [
+            "Bahasa Jepang",
+            "Sastra Indonesia",
+            "Sastra Inggris",
+            "Sastra Jerman",
+            "Ilmu Sejarah"
+        ],
+        "FMIPA" => [
+            "Kimia",
+            "Biologi",
+            "Matematika",
+            "Fisika",
+            "Farmasi",
+            "Sistem Informasi"
+        ],
+        "FKM" => [
+            "Ilmu Kesehatan Masyarakat"
+        ]
     ];
 
     // Bobot tambahan berdasarkan minat
     $bobot_minat = [
-        "Seni" => ["FISIP", "Ekonomi dan Bisnis"],
+        "Seni" => ["FISIP", "Ekonomi dan Bisnis", "FIB"],
         "Olahraga" => ["Peternakan", "Pertanian"],
-        "Sains dan Teknologi" => ["Teknik", "FPIK"],
+        "Sains dan Teknologi" => ["Teknik", "FPIK", "FMIPA"],
         "Ekonomi" => ["Ekonomi dan Bisnis", "Hukum"],
-        "Kesehatan" => ["Kedokteran dan Ilmu Kesehatan"],
+        "Kesehatan" => ["Kedokteran dan Ilmu Kesehatan", "FKM"],
     ];
 
     // Hitung skor untuk setiap jurusan
@@ -116,6 +233,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Cari jurusan dengan skor tertinggi
     $jurusan_rekomendasi = array_keys($skor_jurusan, max($skor_jurusan))[0];
+
+    // Pilih 3 program studi acak dari jurusan yang direkomendasikan
+    if (!empty($prodi_per_jurusan[$jurusan_rekomendasi])) {
+        $prodi_rekomendasi = array_slice(
+            $prodi_per_jurusan[$jurusan_rekomendasi],
+            0,
+            3
+        );
+    }
 }
 ?>
 
@@ -173,8 +299,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </footer>
 
+    <!-- Hasil rekomendasi -->
     <?php if (!empty($jurusan_rekomendasi)): ?>
         <h2>Rekomendasi Jurusan: <?php echo $jurusan_rekomendasi; ?></h2>
+        <h3>Program Studi Rekomendasi:</h3>
+        <ul>
+            <?php foreach ($prodi_rekomendasi as $prodi): ?>
+                <li><?php echo $prodi; ?></li>
+            <?php endforeach; ?>
+        </ul>
     <?php endif; ?>
 </body>
 </html>
