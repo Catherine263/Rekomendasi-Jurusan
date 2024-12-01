@@ -242,6 +242,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             3
         );
     }
+    // Panggil script Python untuk prediksi
+    $command = escapeshellcmd("python3 predict.py " . implode(' ', $nilai));
+    $output = shell_exec($command);
+
+    // Tampilkan hasil
+    echo "Jurusan yang direkomendasikan berdasarkan skor: " . $jurusan_rekomendasi . "<br>";
+    echo "Program studi yang direkomendasikan: <br>";
+    foreach ($prodi_rekomendasi as $prodi) {
+        echo "- " . $prodi . "<br>";
+    }
+
+    // Tampilkan hasil dari Python prediction
+    echo "Hasil prediksi dari Python: " . $output;
 }
 ?>
 
@@ -259,7 +272,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Header -->
     <header>
         <div class="header-container">
-            <h1>Sistem Pakar: Rekomendasi Jurusan Kuliah
+            <h1>Machine Learning: Rekomendasi Jurusan Kuliah
                 <i class="fa-solid fa-gears"></i>
             </h1>
         </div>
@@ -294,20 +307,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Footer -->
     <footer>
         <div class="footer-container">
-            <p>&copy; 2024 Sistem Pakar. All Rights Reserved.</p>
-            <p>Created by Marvell Yehezkiel Palenewen and Catherine Maria Assa</p>
+            <p>&copy; 2024 Machine Learning. All Rights Reserved.</p>
+            <p>Created by Marvell Yehezkiel Palenewen</p>
         </div>
     </footer>
 
     <!-- Hasil rekomendasi -->
-    <?php if (!empty($jurusan_rekomendasi)): ?>
-        <h2>Rekomendasi Jurusan: <?php echo $jurusan_rekomendasi; ?></h2>
-        <h3>Program Studi Rekomendasi:</h3>
-        <ul>
-            <?php foreach ($prodi_rekomendasi as $prodi): ?>
-                <li><?php echo $prodi; ?></li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
+    <?php 
+    if (isset($_POST['submit'])) {
+        // Ambil input dari form
+        $nilai_pp = $_POST['nilai_pp'];
+        $nilai_bi = $_POST['nilai_bi'];
+        $nilai_mtk = $_POST['nilai_mtk'];
+        $nilai_inggris = $_POST['nilai_inggris'];
+        $nilai_penjas = $_POST['nilai_penjas'];
+        $nilai_sejarah = $_POST['nilai_sejarah'];
+        $nilai_seni = $_POST['nilai_seni'];
+        $minat = $_POST['minat'];
+
+        // Panggil script Python untuk prediksi
+        $command = escapeshellcmd("python3 predict.py $nilai_mtk $nilai_bi $nilai_inggris $nilai_penjas $nilai_sejarah $nilai_seni");
+        $output = shell_exec($command);
+
+        // Tampilkan hasil rekomendasi
+        echo "<h2>Rekomendasi Jurusan: " . $output . "</h2>";
+
+        // Sorting Program Studi berdasarkan abjad (ascending)
+        $prodi_rekomendasi = ["Teknik Informatika", "Kedokteran", "Desain Grafis"]; // Contoh daftar prodi
+        sort($prodi_rekomendasi);
+
+        // Filtering: Misalnya hanya menampilkan program studi yang mengandung kata "Teknologi" jika minatnya "Sains dan Teknologi"
+        if ($minat == "Sains dan Teknologi") {
+            $prodi_rekomendasi = array_filter($prodi_rekomendasi, function($prodi) {
+                return strpos($prodi, "Teknologi") !== false; // Filter program studi yang mengandung "Teknologi"
+            });
+        }
+
+        // Menampilkan 3 program studi pertama yang sudah disortir dan difilter
+        $prodi_rekomendasi = array_slice($prodi_rekomendasi, 0, 3);
+
+        // Menampilkan daftar program studi
+        echo "<h3>Program Studi Rekomendasi:</h3><ul>";
+        foreach ($prodi_rekomendasi as $prodi) {
+            echo "<li>" . $prodi . "</li>";
+        }
+        echo "</ul>";
+    }
+    ?>
 </body>
 </html>
