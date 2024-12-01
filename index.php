@@ -272,7 +272,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Header -->
     <header>
         <div class="header-container">
-            <h1>Machine Learning: Rekomendasi Jurusan Kuliah
+            <h1>Sistem Pakar: Rekomendasi Jurusan Kuliah
                 <i class="fa-solid fa-gears"></i>
             </h1>
         </div>
@@ -307,8 +307,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Footer -->
     <footer>
         <div class="footer-container">
-            <p>&copy; 2024 Machine Learning. All Rights Reserved.</p>
-            <p>Created by Marvell Yehezkiel Palenewen</p>
+            <p>&copy; 2024 Sistem Pakar. All Rights Reserved.</p>
+            <p>Created by Marvell Yehezkiel Palenewen dan Cathrine Maria Assa</p>
         </div>
     </footer>
 
