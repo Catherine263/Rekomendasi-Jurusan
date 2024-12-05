@@ -256,6 +256,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Tampilkan hasil dari Python prediction
     echo "Hasil prediksi dari Python: " . $output;
 }
+// Membaca data dari CSV
+function bacaCSV($filename) {
+    $data = [];
+    if (($handle = fopen($filename, "r")) !== FALSE) {
+        $header = fgetcsv($handle); // Membaca header
+        while (($row = fgetcsv($handle)) !== FALSE) {
+            $data[] = array_combine($header, $row);
+        }
+        fclose($handle);
+    }
+    return $data;
+}
+
+$jurusanData = bacaCSV('data_jurusan.csv');
+
+// Menampilkan hasil (contoh)
+foreach ($jurusanData as $jurusan) {
+    echo "Jurusan: " . $jurusan['Jurusan'] . "<br>";
+    echo "Program Studi: " . $jurusan['Program Studi'] . "<br>";
+    echo "Bobot Matematika: " . $jurusan['Bobot Matematika'] . "<br><br>";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -267,12 +289,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style.css">
     <!-- link untuk icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* Inline CSS to change the background image directly in index.php */
+        body {
+            background-image: url('https://wallpaperaccess.com/full/8405988.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="header-container">
-            <h1>Sistem Pakar: Rekomendasi Jurusan Kuliah
+            <h1>Machine Learning: Rekomendasi Jurusan Kuliah
                 <i class="fa-solid fa-gears"></i>
             </h1>
         </div>
@@ -307,8 +338,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Footer -->
     <footer>
         <div class="footer-container">
-            <p>&copy; 2024 Sistem Pakar. All Rights Reserved.</p>
-            <p>Created by Marvell Yehezkiel Palenewen dan Cathrine Maria Assa</p>
+            <p>&copy; 2024 Machine Learning. All Rights Reserved.</p>
+            <p>Created by Marvell Yehezkiel Palenewen, Alessandro dan Sisilia</p>
         </div>
     </footer>
 
@@ -355,4 +386,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     ?>
 </body>
+</html>
 </html>
