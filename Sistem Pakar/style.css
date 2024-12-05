@@ -1,0 +1,212 @@
+    Q.footer-container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styling untuk keseluruhan body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin-top: 80px;
+}
+
+/* Header Styling */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 0px 15px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background-color: #335294;
+    color: white;
+}
+
+.header-container h1 {
+    text-align: center;
+    font-size: 25px;
+}
+
+/* Styling untuk form */
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin-top: 5px;
+}
+
+/* Styling untuk tiap bagian input */
+.input-section {
+    margin-bottom: 15px;
+}
+
+.input-section h3 {
+    margin-bottom: 20px;
+    font-size: 23px;
+}
+
+/* Styling label untuk setiap input */
+label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Styling untuk setiap input text dan select */
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    background-color: #fafafa;
+}
+
+/* Styling untuk tombol submit */
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #4c5baf;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efek hover pada tombol submit */
+button[type="submit"]:hover {
+    background-color: #2d40ac;
+}
+
+/* Tampilan Rekomendasi */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Konten popup */
+.popup-content {
+    background-color: #fff; /* Warna latar belakang putih */
+    border-radius: 10px; /* Sudut membulat */
+    padding: 20px;
+    width: 80%; /* Lebar 80% layar */
+    max-width: 600px; /* Maksimal lebar */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Efek bayangan */
+    text-align: center;
+}
+
+/* Tombol kembali */
+.back-button {
+    background-color: #ff4d4d; /* Warna merah */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.back-button:hover {
+    background-color: #ff1a1a; /* Warna lebih gelap saat hover */
+}
+
+/* Judul popup */
+.popup-content h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Subjudul */
+.popup-content h3 {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Daftar program studi */
+.popup-content ul {
+    list-style-type: disc; /* Tampilan poin */
+    padding-left: 20px;
+    text-align: left;
+}
+
+.popup-content ul li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+
+
+/* Footer Styling */
+footer {
+    background-color: #333;
+    color: white;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-container p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Styling untuk rekomendasi jurusan */
+h2 {
+    margin-top: 20px;
+    font-size: 22px;
+    color: #4c5baf;
+}
+
+/* Responsif untuk layar lebih kecil */
+@media (max-width: 768px) {
+    form {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .input-section {
+        margin-bottom: 15px;
+    }
+
+    button[type="submit"] {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
